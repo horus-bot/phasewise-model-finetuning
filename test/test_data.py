@@ -80,4 +80,4 @@ plt.suptitle("Random Training Samples", fontsize=14)
 plt.tight_layout()
 plt.show()
 
-print("\n🎉 Dataset verification complete. Ready for training.")
+print("\n Dataset verification complete. Ready for training.")
