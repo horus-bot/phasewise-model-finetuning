@@ -1,20 +1,20 @@
-# Machine Learning Model Training & Fine-Tuning Experiment
+# Diabetic Retinopathy Fine-Tuning Study
 
-This repository contains an end-to-end machine learning training pipeline that explores **model training, validation, and fine-tuning (Phase 1 & Phase 2)**.  
-The project focuses on understanding **generalization, overfitting, and validation behavior** rather than achieving state-of-the-art performance.
+This repository contains an end-to-end machine learning training pipeline that explores **model training, validation, and phase-wise fine-tuning (Phase 1 & Phase 2)** using a medical imaging dataset.  
+The project focuses on understanding **generalization, overfitting, and validation behavior**, rather than achieving state-of-the-art performance.
 
 ---
 
 ## 📌 Overview
 
-The project implements:
+This project implements:
 - A complete training loop with accuracy tracking
 - A validation pipeline to monitor generalization
 - A two-phase training strategy:
   - **Phase 1:** Base training
   - **Phase 2:** Fine-tuning with additional parameters unfrozen
 
-The goal is to study how fine-tuning impacts training vs validation performance.
+The primary goal is to study how fine-tuning affects **training vs validation performance**, especially in limited and imbalanced medical datasets.
 
 ---
 
@@ -23,14 +23,28 @@ The goal is to study how fine-tuning impacts training vs validation performance.
 ### Phase 1
 - Initial training phase
 - Model learns core feature representations
-- Validation accuracy improves steadily in early epochs
+- Validation accuracy improves steadily during early epochs
 
 ### Phase 2 (Fine-Tuning)
 - Additional layers are unfrozen
 - Model capacity increases
 - Training accuracy improves further, while validation accuracy fluctuates
 
-This setup highlights a common real-world challenge: **improved training performance does not always translate to better generalization**.
+This setup highlights a common real-world challenge:  
+**better training performance does not always translate to better generalization**.
+
+---
+
+## 📂 Dataset
+
+This project uses the **IDRiD (Indian Diabetic Retinopathy Image Dataset)**, a publicly available medical imaging dataset focused on diabetic retinopathy analysis.
+
+- **Dataset source:**  
+  https://www.kaggle.com/datasets/mariaherrerot/idrid-dataset
+- **Data type:** Retinal fundus images
+- **Domain:** Medical imaging (diabetic retinopathy)
+
+The dataset is relatively small and class-imbalanced, making generalization challenging and providing a realistic setting to study overfitting and fine-tuning behavior.
 
 ---
 
@@ -44,7 +58,7 @@ This setup highlights a common real-world challenge: **improved training perform
 | Final Outcome | Signs of overfitting during fine-tuning |
 
 **Key Insight:**  
-The best-performing model is **not the final epoch**, but an earlier checkpoint where validation accuracy was highest. This demonstrates the importance of **early stopping and checkpoint selection**.
+The best-performing model is **not the final epoch**, but an earlier checkpoint where validation accuracy was highest. This demonstrates the importance of **early stopping and validation-based checkpoint selection**.
 
 ---
 
@@ -53,16 +67,16 @@ The best-performing model is **not the final epoch**, but an earlier checkpoint 
 - The model successfully fits the training data
 - Validation performance indicates limited generalization
 - Fine-tuning improves memorization more than real-world performance
-- The project serves as a **learning-focused experiment**, not a production-ready system
+- The project is intended as a **learning-focused experiment**, not a production-ready system
 
 ---
 
 ## ✅ What This Project Demonstrates Well
 
 - Proper separation of training and validation data
-- Transparent reporting of results (including weaknesses)
-- Realistic behavior of models under fine-tuning
-- Practical ML experimentation workflow
+- Transparent reporting of results, including limitations
+- Realistic fine-tuning behavior on medical datasets
+- A practical and reproducible ML experimentation workflow
 
 ---
 
@@ -71,7 +85,14 @@ The best-performing model is **not the final epoch**, but an earlier checkpoint 
 - Model is **not production-ready**
 - Validation accuracy is unstable
 - Performance depends heavily on early checkpoint selection
-- Further improvements would require more data, regularization, or architectural tuning
+- Improvements would require more data, stronger regularization, or architectural changes
+
+---
+
+## ⚠️ Medical Disclaimer
+
+**This project is for research and educational purposes only.**  
+It is **not intended for clinical diagnosis, treatment, or medical decision-making**.
 
 ---
 
