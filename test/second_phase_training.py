@@ -5,7 +5,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms, models
 from torch.utils.data import DataLoader
 
-# ===================== CONFIG =====================
+
 BASE_DIR = r"C:\Users\lenovo\Desktop\image classicification"
 DATASET_DIR = os.path.join(BASE_DIR, "dataset")
 
@@ -15,7 +15,7 @@ LR = 1e-4
 NUM_CLASSES = 5
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
 
-# ===================== TRANSFORMS =====================
+
 train_transform = transforms.Compose([
     transforms.Resize((224, 224)),
     transforms.RandomHorizontalFlip(),
@@ -28,7 +28,7 @@ val_transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
-# ===================== DATA =====================
+
 train_ds = datasets.ImageFolder(
     root=os.path.join(DATASET_DIR, "train"),
     transform=train_transform
@@ -42,10 +42,10 @@ val_ds = datasets.ImageFolder(
 train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False)
 
-# ===================== MODEL =====================
+
 model = models.resnet18(pretrained=True)
 
-# Freeze everything first
+# Freeze everything first and hope validation doesnt drop lol
 for param in model.parameters():
     param.requires_grad = False
 
@@ -58,7 +58,7 @@ for param in model.layer4.parameters():
 
 model = model.to(DEVICE)
 
-# ===================== LOSS & OPTIMIZER =====================
+
 criterion = nn.CrossEntropyLoss()
 
 optimizer = optim.Adam(
@@ -66,7 +66,7 @@ optimizer = optim.Adam(
     lr=LR
 )
 
-# ===================== TRAIN LOOP =====================
+
 for epoch in range(EPOCHS):
     model.train()
     train_loss, correct, total = 0, 0, 0
@@ -106,4 +106,4 @@ for epoch in range(EPOCHS):
         f"Train Acc: {train_acc:.2f}% | Val Acc: {val_acc:.2f}%"
     )
 
-print("🔥 Phase 2 fine-tuning complete")
+print(" Phase 2 fine-tuning complete")

@@ -27,7 +27,7 @@ val_transform = transforms.Compose([
     transforms.ToTensor(),
 ])
 
-# ===================== DATA =====================
+
 train_ds = datasets.ImageFolder(
     root=os.path.join(DATASET_DIR, "train"),
     transform=train_transform
@@ -41,7 +41,7 @@ val_ds = datasets.ImageFolder(
 train_loader = DataLoader(train_ds, batch_size=BATCH_SIZE, shuffle=True)
 val_loader = DataLoader(val_ds, batch_size=BATCH_SIZE, shuffle=False)
 
-# ===================== MODEL =====================
+
 model = models.resnet18(pretrained=True)
 
 # Freeze backbone
@@ -53,11 +53,11 @@ model.fc = nn.Linear(model.fc.in_features, NUM_CLASSES)
 
 model = model.to(DEVICE)
 
-# ===================== LOSS & OPTIMIZER =====================
+
 criterion = nn.CrossEntropyLoss()
 optimizer = optim.Adam(model.fc.parameters(), lr=LR)
 
-# ===================== TRAIN LOOP =====================
+
 for epoch in range(EPOCHS):
     model.train()
     train_loss, correct, total = 0, 0, 0
@@ -78,7 +78,7 @@ for epoch in range(EPOCHS):
 
     train_acc = 100 * correct / total
 
-    # -------- Validation --------
+   
     model.eval()
     val_correct, val_total = 0, 0
 
@@ -97,4 +97,4 @@ for epoch in range(EPOCHS):
         f"Train Acc: {train_acc:.2f}% | Val Acc: {val_acc:.2f}%"
     )
 
-print("✅ Phase 1 training complete")
+print(" Phase 1 training complete")
